@@ -18,7 +18,7 @@ class User extends Model<
     declare projects?:NonAttribute<Projects[]>;
     declare address?:NonAttribute<Address[]>;
 
-    get name():NonAttribute<string>{
+    get getName():NonAttribute<string>{
         return this.firstName;
     }
     declare static associations: { 
@@ -71,6 +71,8 @@ User.init({
     }
 },{
     tableName:"User",
+    paranoid:true,
+    deletedAt:"deletedAt",
     sequelize
 });
 
@@ -86,6 +88,7 @@ Projects.init({
     updatedAt:DataTypes.DATE
 },{
     tableName:"Projects",
+    paranoid:true,
     sequelize
 });
 
@@ -117,3 +120,6 @@ User.hasMany(Address,{
     onDelete:"CASCADE",
     onUpdate:"CASCADE"
 });
+
+
+export {User,Projects,Address}

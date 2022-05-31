@@ -1,5 +1,6 @@
 import express,{Request,Response,NextFunction,Application} from "express";
 
+
 let app:Application = express()
 app.use(express.json())
 
