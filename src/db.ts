@@ -16,6 +16,7 @@ class User extends Model<
     declare updatedAt:CreationOptional<Date>;
 
     declare projects?:NonAttribute<Projects[]>;
+    declare address?:NonAttribute<Address[]>;
 
     get name():NonAttribute<string>{
         return this.firstName;
@@ -72,6 +73,7 @@ User.init({
     tableName:"User",
     sequelize
 });
+
 Projects.init({
     id:{
         type:DataTypes.INTEGER.UNSIGNED
@@ -85,4 +87,33 @@ Projects.init({
 },{
     tableName:"Projects",
     sequelize
+});
+
+Address.init({
+    id:{
+        type:DataTypes.INTEGER.UNSIGNED,
+        primaryKey:true,
+        autoIncrement:true
+    },
+    address:{
+        type:DataTypes.STRING
+    },
+    createdAt:DataTypes.DATE,
+    updatedAt:DataTypes.DATE
+},{
+    sequelize,
+    tableName:"Address"
+})
+
+Projects.belongsTo(User);
+Address.belongsTo(User);
+
+User.hasMany(Projects,{
+    onUpdate:"CASCADE",
+    onDelete:"CASCADE"
+});
+
+User.hasMany(Address,{
+    onDelete:"CASCADE",
+    onUpdate:"CASCADE"
 });
