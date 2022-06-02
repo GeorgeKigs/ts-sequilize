@@ -10,7 +10,10 @@ import {
 	DataTypes,
 } from "sequelize";
 
-const sequelize = new Sequelize("");
+const sequelize = new Sequelize("awstutorials", "postgres", "root", {
+	host: "localhost",
+	dialect: "postgres",
+});
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: CreationOptional<number>;
@@ -87,6 +90,7 @@ Projects.init(
 	{
 		id: {
 			type: DataTypes.INTEGER.UNSIGNED,
+			primaryKey: true,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -134,4 +138,4 @@ User.hasMany(Address, {
 	onUpdate: "CASCADE",
 });
 
-export { User, Projects, Address };
+export { User, Projects, Address, sequelize };
