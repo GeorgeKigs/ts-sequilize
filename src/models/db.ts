@@ -10,10 +10,20 @@ import {
 	DataTypes,
 } from "sequelize";
 
-const sequelize = new Sequelize("awstutorials", "postgres", "root", {
-	host: "localhost",
-	dialect: "postgres",
-});
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env" });
+console.log(process.env);
+const sequelize = new Sequelize(
+	//@ts-ignore
+	process.env.AWS_DB_MYSQL,
+	process.env["AWS_USERNAME_MYSQL"],
+	process.env["AWS_PASSWORD_MYSQL"],
+	{
+		host: "database-1.cgyoy1jvpwmn.us-east-1.rds.amazonaws.com",
+		dialect: "postgres",
+	}
+);
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
 	declare id: CreationOptional<number>;
