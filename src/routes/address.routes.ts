@@ -1,7 +1,7 @@
 import AddressDetails from "../models/address.model";
-import express, { Request, Response, NextFunction, Application } from "express";
+import express, { Request, Response, NextFunction, Router } from "express";
 
-const router = express.Router();
+const router: Router = express.Router();
 router
 	.get("/get", async (req: Request, res: Response, next: NextFunction) => {
 		var body = req.body;

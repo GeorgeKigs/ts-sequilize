@@ -2,6 +2,7 @@ import { User } from "./db";
 
 interface getUser {
 	firstName: string;
+	password: string;
 	id?: number;
 }
 
