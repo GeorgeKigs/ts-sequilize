@@ -1,11 +1,11 @@
 import express, { Request, Response, NextFunction, Application } from "express";
-import { sequelize } from "./models/db";
+import { sequelize_db } from "./sql.config";
 import { addressRoute } from "./routes/address.routes";
 import { projectRoute } from "./routes/projects.routes";
 import { userRoute } from "./routes/users.routes";
 
 (async () => {
-	await sequelize.sync();
+	await sequelize_db.sync();
 })();
 
 let app: Application = express();
